@@ -1,0 +1,83 @@
+[
+  {
+    "id": "task-1",
+    "title": "Design CRISP-DM Machine Learning Pipeline",
+    "description": "Establish data preparation, feature engineering transformations, and model evaluation protocols.",
+    "status": "in_progress",
+    "priority": "urgent",
+    "dueDate": "2026-09-10",
+    "tags": ["Machine Learning", "Architecture", "CRISP-DM"],
+    "subtasks": [
+      { "id": "sub-1", "title": "Define business understanding objectives", "completed": true },
+      { "id": "sub-2", "title": "Build outlier filtering and imputation modules", "completed": true },
+      { "id": "sub-3", "title": "Configure cross-validation split strategy", "completed": false }
+    ],
+    "estimatedMinutes": 180,
+    "createdAt": "2026-09-01T10:00:00.000Z",
+    "updatedAt": "2026-09-02T15:30:00.000Z"
+  },
+  {
+    "id": "task-2",
+    "title": "Implement Transformer KV Cache Optimization",
+    "description": "Accelerate autoregressive inference throughput by caching past key and value projection tensors.",
+    "status": "todo",
+    "priority": "high",
+    "dueDate": "2026-09-12",
+    "tags": ["Deep Learning", "Transformers", "Optimization"],
+    "subtasks": [
+      { "id": "sub-4", "title": "Allocate continuous buffer cache", "completed": false },
+      { "id": "sub-5", "title": "Benchmark tokens/second latency", "completed": false }
+    ],
+    "estimatedMinutes": 120,
+    "createdAt": "2026-09-01T12:00:00.000Z",
+    "updatedAt": "2026-09-01T12:00:00.000Z"
+  },
+  {
+    "id": "task-3",
+    "title": "Build FP-Growth Frequent Pattern Miner",
+    "description": "Construct compact FP-Tree data structures and mine high confidence association rules.",
+    "status": "done",
+    "priority": "medium",
+    "dueDate": "2026-09-02",
+    "tags": ["Data Mining", "Algorithms"],
+    "subtasks": [
+      { "id": "sub-6", "title": "Compute support thresholds", "completed": true },
+      { "id": "sub-7", "title": "Generate association rule dataframe", "completed": true }
+    ],
+    "estimatedMinutes": 90,
+    "completedAt": "2026-09-02T18:00:00.000Z",
+    "createdAt": "2026-08-30T09:00:00.000Z",
+    "updatedAt": "2026-09-02T18:00:00.000Z"
+  },
+  {
+    "id": "task-4",
+    "title": "Deploy NYC Taxi Duration Random Forest Regressor",
+    "description": "Serve FastAPI endpoint with geospatial haversine and bearing feature transformations.",
+    "status": "review",
+    "priority": "high",
+    "dueDate": "2026-09-05",
+    "tags": ["FastAPI", "Deployment", "Geospatial"],
+    "subtasks": [
+      { "id": "sub-8", "title": "Validate endpoint latency under 10ms", "completed": true },
+      { "id": "sub-9", "title": "Verify Leaflet coordinate bounds", "completed": false }
+    ],
+    "estimatedMinutes": 60,
+    "createdAt": "2026-08-31T14:00:00.000Z",
+    "updatedAt": "2026-09-02T11:00:00.000Z"
+  },
+  {
+    "id": "task-5",
+    "title": "Customer RFM Segmentation Clustering Engine",
+    "description": "Perform K-Means & GMM clustering with silhouette score optimization on Kaggle customer data.",
+    "status": "backlog",
+    "priority": "low",
+    "dueDate": "2026-09-18",
+    "tags": ["Clustering", "Analytics"],
+    "subtasks": [
+      { "id": "sub-10", "title": "Calculate Recency, Frequency, Monetary metrics", "completed": false }
+    ],
+    "estimatedMinutes": 150,
+    "createdAt": "2026-09-02T08:00:00.000Z",
+    "updatedAt": "2026-09-02T08:00:00.000Z"
+  }
+]
