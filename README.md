@@ -20,12 +20,13 @@ A comprehensive, production-grade portfolio of **6 Full-Stack Data Science, Mach
 ## 🎯 Verbatim Reproduction Prompt Catalog, Implementation Plans & Walkthroughs
 
 * **Prompt Catalog**: Every prompt used to generate, iterate, and verify these applications is cataloged chronologically in 👉 **[PROMPTS.md](./PROMPTS.md)**
-* **Project 0 Implementation Plan**: [`00_dynamic_todo_workspace/IMPLEMENTATION_PLAN.md`](./00_dynamic_todo_workspace/IMPLEMENTATION_PLAN.md)
-* **Project 1 Implementation Plan**: [`01_nyc_taxi_trip_prediction/IMPLEMENTATION_PLAN.md`](./01_nyc_taxi_trip_prediction/IMPLEMENTATION_PLAN.md)
-* **Project 2 Implementation Plan**: [`02_nano_llm_transformer/IMPLEMENTATION_PLAN.md`](./02_nano_llm_transformer/IMPLEMENTATION_PLAN.md)
-* **Project 3 Implementation Plan**: [`03_customer_segmentation_clustering/IMPLEMENTATION_PLAN.md`](./03_customer_segmentation_clustering/IMPLEMENTATION_PLAN.md)
-* **Project 4 Implementation Plan**: [`04_associative_pattern_mining/IMPLEMENTATION_PLAN.md`](./04_associative_pattern_mining/IMPLEMENTATION_PLAN.md)
-* **Project 5 Implementation Plan**: [`05_data_science_skills_lab/IMPLEMENTATION_PLAN.md`](./05_data_science_skills_lab/IMPLEMENTATION_PLAN.md)
+* **Video Presentation Scripts (<12 mins total)**: Timed demo scripts for all 6 projects are cataloged in 👉 **[VIDEO_SCRIPTS.md](./VIDEO_SCRIPTS.md)**
+* **Project 0 Implementation Plan**: [`00_dynamic_todo_workspace/IMPLEMENTATION_PLAN.md`](./00_dynamic_todo_workspace/IMPLEMENTATION_PLAN.md) • [`VIDEO_SCRIPT.md`](./00_dynamic_todo_workspace/VIDEO_SCRIPT.md)
+* **Project 1 Implementation Plan**: [`01_nyc_taxi_trip_prediction/IMPLEMENTATION_PLAN.md`](./01_nyc_taxi_trip_prediction/IMPLEMENTATION_PLAN.md) • [`VIDEO_SCRIPT.md`](./01_nyc_taxi_trip_prediction/VIDEO_SCRIPT.md)
+* **Project 2 Implementation Plan**: [`02_nano_llm_transformer/IMPLEMENTATION_PLAN.md`](./02_nano_llm_transformer/IMPLEMENTATION_PLAN.md) • [`VIDEO_SCRIPT.md`](./02_nano_llm_transformer/VIDEO_SCRIPT.md)
+* **Project 3 Implementation Plan**: [`03_customer_segmentation_clustering/IMPLEMENTATION_PLAN.md`](./03_customer_segmentation_clustering/IMPLEMENTATION_PLAN.md) • [`VIDEO_SCRIPT.md`](./03_customer_segmentation_clustering/VIDEO_SCRIPT.md)
+* **Project 4 Implementation Plan**: [`04_associative_pattern_mining/IMPLEMENTATION_PLAN.md`](./04_associative_pattern_mining/IMPLEMENTATION_PLAN.md) • [`VIDEO_SCRIPT.md`](./04_associative_pattern_mining/VIDEO_SCRIPT.md)
+* **Project 5 Implementation Plan**: [`05_data_science_skills_lab/IMPLEMENTATION_PLAN.md`](./05_data_science_skills_lab/IMPLEMENTATION_PLAN.md) • [`VIDEO_SCRIPT.md`](./05_data_science_skills_lab/VIDEO_SCRIPT.md)
 
 ---
 
