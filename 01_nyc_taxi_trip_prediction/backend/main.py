@@ -49,7 +49,7 @@ def calculate_bearing(lat1, lon1, lat2, lon2):
 
 # Train Lightweight Surrogate ML Models on Startup
 np.random.seed(42)
-N_SAMPLES = 2500
+N_SAMPLES = 300
 
 # Synthetic NYC coordinates bounded around Manhattan / Queens / Brooklyn
 sample_pickup_lat = np.random.uniform(40.70, 40.80, N_SAMPLES)
@@ -81,11 +81,16 @@ X_train = np.column_stack([
 ])
 y_train = sample_durations
 
-rf_model = RandomForestRegressor(n_estimators=45, max_depth=10, random_state=42, n_jobs=-1)
-rf_model.fit(X_train, y_train)
+ridge_model = Ridge(alpha=1.0)
+ridge_model.fit(X_train, y_train)
 
-gb_model = GradientBoostingRegressor(n_estimators=60, max_depth=5, random_state=42)
-gb_model.fit(X_train, y_train)
+_rf_model = None
+def get_rf_model():
+    global _rf_model
+    if _rf_model is None:
+        _rf_model = RandomForestRegressor(n_estimators=25, max_depth=8, random_state=42, n_jobs=1)
+        _rf_model.fit(X_train, y_train)
+    return _rf_model
 
 ridge_model = Ridge(alpha=1.0)
 ridge_model.fit(X_train, y_train)
@@ -125,12 +130,10 @@ def predict_trip(req: PredictRequest):
         is_rush
     ]])
 
-    if req.selected_model == "gradient_boosting":
-        pred_duration = float(gb_model.predict(features)[0])
-    elif req.selected_model == "ridge":
+    if req.selected_model == "ridge":
         pred_duration = float(ridge_model.predict(features)[0])
     else:
-        pred_duration = float(rf_model.predict(features)[0])
+        pred_duration = float(get_rf_model().predict(features)[0])
 
     # Airport surcharge / minimum duration
     if is_jfk:

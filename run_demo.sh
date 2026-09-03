@@ -28,7 +28,7 @@ if [ -z "$PROJECT" ]; then
   echo "Usage: ./run_demo.sh <project_id>"
   echo ""
   echo "Available Projects:"
-  echo "  0 | 00_dynamic_todo_workspace              (Ports: Backend 5000 / Frontend 5173)"
+  echo "  0 | 00_dynamic_todo_workspace              (Ports: Backend 5001 / Frontend 5173)"
   echo "  1 | 01_nyc_taxi_trip_prediction            (Ports: Backend 8000 / Frontend 5174)"
   echo "  2 | 02_nano_llm_transformer                (Ports: Backend 8002 / Frontend 5175)"
   echo "  3 | 03_customer_segmentation_clustering    (Ports: Backend 8003 / Frontend 5176)"
@@ -54,7 +54,7 @@ case "$PROJECT" in
     echo "📦 Ensuring dependencies..."
     cd "$DIR/server" && npm install --silent
     cd "$DIR/client" && npm install --silent
-    echo "⚡ Launching Backend (Port 5000)..."
+    echo "⚡ Launching Backend (Port 5001)..."
     cd "$DIR/server" && npm run dev &
     sleep 2
     echo "⚡ Launching Frontend (Port 5173)..."
