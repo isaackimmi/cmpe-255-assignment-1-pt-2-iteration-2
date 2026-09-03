@@ -6,14 +6,14 @@ A comprehensive, production-grade portfolio of **6 Full-Stack Data Science, Mach
 
 ## 🏛️ Comprehensive Systems Portfolio Index (6 Projects)
 
-| # | System Title & Directory | Domain & Methodology | Backend Port | Frontend Port | Description & Key Features |
-|---|---|---|:---:|:---:|---|
-| **0** | [**Zenith Dynamic Task Workspace**](./00_dynamic_todo_workspace) | Full-Stack Reactive Task Workspace & SSE Telemetry | `5000` | `5173` | Modern dynamic task management, Kanban, priority matrix, subtask decomposition, search/filter, and live productivity analytics. |
-| **1** | [**NYC Taxi Trip Prediction**](./01_nyc_taxi_trip_prediction) | CRISP-DM Spatial Regression & AutoResearch | `8000` | `5174` | End-to-end trip duration & fare prediction with interactive Leaflet map, spatial feature engineering, multi-model leaderboard, and CRISP-DM report. |
-| **2** | [**NanoLlama SFT LLM**](./02_nano_llm_transformer) | PyTorch Autoregressive Transformer (RoPE, SwiGLU, SFT) | `8002` | `5175` | SOTA transformer architecture with rotary embeddings, SwiGLU activations, KV caching, live text generation studio, and ML telemetry dashboard. |
-| **3** | [**Customer Clustering Intelligence**](./03_customer_segmentation_clustering) | Topological Partitioning & AutoResearch | `8003` | `5176` | Customer segmentation with K-Means, DBSCAN, Hierarchical, GMM, PCA/t-SNE 2D/3D projections, silhouette diagnostics, and persona generation. |
-| **4** | [**Market Basket Pattern Mining**](./04_associative_pattern_mining) | Apriori & FP-Growth Pattern Affinity | `8004` | `5177` | Association rule mining, interactive co-occurrence network graphs, support/confidence/lift matrix, and live basket recommendation engine. |
-| **5** | [**DS Skills Mastery Lab**](./05_data_science_skills_lab) | 54 Analytical Skills & Kaggle Benchmarks | `8005` | `5178` | Interactive lab demonstrating end-to-end data analytics and ML skills across popular Kaggle datasets with live visual simulation dashboards. |
+| # | System Title & Directory | Domain & Methodology | Backend Port | Frontend Port | Primary Screenshot Preview |
+|---|---|---|:---:|:---:|:---:|
+| **0** | [**Zenith Dynamic Task Workspace**](./00_dynamic_todo_workspace) | Full-Stack Reactive Task Workspace & SSE Telemetry | `5001` | `5173` | ![Zenith Todo](./docs/screenshots/todo_list_view.png) |
+| **1** | [**NYC Taxi Trip Prediction**](./01_nyc_taxi_trip_prediction) | CRISP-DM Spatial Regression & AutoResearch | `8000` | `5174` | ![NYC Taxi](./docs/screenshots/nyc_estimator_view.png) |
+| **2** | [**NanoLlama SFT LLM**](./02_nano_llm_transformer) | PyTorch Autoregressive Transformer (RoPE, SwiGLU, SFT) | `8002` | `5175` | ![NanoLlama](./docs/screenshots/nanollama_chat_studio.png) |
+| **3** | [**Customer Clustering**](./03_customer_segmentation_clustering) | Topological Partitioning & AutoResearch | `8003` | `5176` | ![Clustering](./docs/screenshots/clustering_explorer.png) |
+| **4** | [**Market Basket Mining**](./04_associative_pattern_mining) | Apriori & FP-Growth Pattern Affinity | `8004` | `5177` | ![Market Basket](./docs/screenshots/market_basket_graph.png) |
+| **5** | [**DS Skills Mastery Lab**](./05_data_science_skills_lab) | 54 Analytical Skills & Kaggle Benchmarks | `8005` | `5178` | ![Skills Lab](./docs/screenshots/skills_lab_catalog.png) |
 
 ---
 
