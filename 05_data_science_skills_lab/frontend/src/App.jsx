@@ -253,12 +253,12 @@ export default function App() {
                       <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8, height: 160, paddingBottom: 10, borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                         {executionResult.chart_data.map((bin, i) => {
                           const maxCount = Math.max(...executionResult.chart_data.map(b => b.count));
-                          const heightPct = Math.round((bin.count / (maxCount || 1)) * 100);
+                          const barHeight = Math.max(12, Math.round((bin.count / (maxCount || 1)) * 110));
                           return (
-                            <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                            <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', height: 140, justifyContent: 'flex-end', gap: 4 }}>
                               <span style={{ fontSize: 9, color: '#38bdf8', fontWeight: 600 }}>{bin.count}</span>
-                              <div style={{ width: '100%', height: `${heightPct}%`, background: 'linear-gradient(180deg, #38bdf8, #0284c7)', borderRadius: 3 }}></div>
-                              <span style={{ fontSize: 9, color: '#64748b', transform: 'rotate(-30deg)', transformOrigin: 'top left', whiteSpace: 'nowrap' }}>{bin.range}</span>
+                              <div style={{ width: '100%', height: `${barHeight}px`, background: 'linear-gradient(180deg, #38bdf8, #0284c7)', borderRadius: 3 }}></div>
+                              <span style={{ fontSize: 9, color: '#64748b', transform: 'rotate(-30deg)', transformOrigin: 'top left', whiteSpace: 'nowrap', marginTop: 4 }}>{bin.range}</span>
                             </div>
                           );
                         })}

@@ -414,19 +414,34 @@ export default function App() {
         {activeTab === 'diagnostics' && diagnostics && (
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
             <div className="glass-panel" style={{ padding: 20 }}>
-              <h3 style={{ fontSize: 15, fontWeight: 700, color: '#f8fafc', marginBottom: 6 }}>Elbow Method: Within-Cluster Sum of Squares (WCSS)</h3>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                <h3 style={{ fontSize: 15, fontWeight: 700, color: '#f8fafc' }}>Elbow Method: WCSS Inertia</h3>
+                <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 12, background: 'rgba(16,185,129,0.15)', color: '#34d399', fontWeight: 700 }}>Optimal: K=5</span>
+              </div>
               <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 20 }}>Optimal cluster count is identified at the inflection "elbow" point (K=5).</p>
 
-              <div style={{ display: 'flex', alignItems: 'flex-end', gap: 14, height: 200, paddingBottom: 10, borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-end', gap: 14, height: 210, paddingBottom: 10, borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                 {diagnostics.wcss_inertia.map((w, i) => {
                   const maxW = Math.max(...diagnostics.wcss_inertia);
-                  const heightPct = Math.round((w / maxW) * 100);
+                  const barHeight = Math.max(16, Math.round((w / maxW) * 140));
                   const isOpt = diagnostics.k_range[i] === diagnostics.recommended_k;
                   return (
-                    <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-                      <span style={{ fontSize: 10, color: isOpt ? '#34d399' : '#64748b', fontWeight: isOpt ? 700 : 400 }}>{Math.round(w)}</span>
-                      <div style={{ width: '100%', height: `${heightPct}%`, background: isOpt ? 'linear-gradient(180deg, #10b981, #06b6d4)' : 'rgba(255,255,255,0.1)', borderRadius: 4 }}></div>
-                      <span style={{ fontSize: 11, fontWeight: isOpt ? 800 : 500, color: isOpt ? '#34d399' : '#94a3b8' }}>K={diagnostics.k_range[i]}</span>
+                    <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', height: 180, justifyContent: 'flex-end', gap: 8 }}>
+                      <span style={{ fontSize: 11, color: isOpt ? '#34d399' : '#94a3b8', fontWeight: isOpt ? 800 : 500 }}>{Math.round(w)}</span>
+                      <div
+                        style={{
+                          width: '100%',
+                          height: `${barHeight}px`,
+                          background: isOpt
+                            ? 'linear-gradient(180deg, #10b981, #06b6d4)'
+                            : 'linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.08))',
+                          borderRadius: '6px 6px 2px 2px',
+                          boxShadow: isOpt ? '0 0 16px rgba(16,185,129,0.4)' : 'none',
+                          border: isOpt ? '1px solid rgba(52,211,153,0.5)' : 'none',
+                          transition: 'all 0.3s ease'
+                        }}
+                      ></div>
+                      <span style={{ fontSize: 12, fontWeight: isOpt ? 800 : 600, color: isOpt ? '#34d399' : '#64748b' }}>K={diagnostics.k_range[i]}</span>
                     </div>
                   );
                 })}
@@ -434,18 +449,34 @@ export default function App() {
             </div>
 
             <div className="glass-panel" style={{ padding: 20 }}>
-              <h3 style={{ fontSize: 15, fontWeight: 700, color: '#f8fafc', marginBottom: 6 }}>Silhouette Analysis Across Cluster Numbers</h3>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                <h3 style={{ fontSize: 15, fontWeight: 700, color: '#f8fafc' }}>Silhouette Analysis (Separation)</h3>
+                <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 12, background: 'rgba(56,189,248,0.15)', color: '#38bdf8', fontWeight: 700 }}>Peak: S=0.55</span>
+              </div>
               <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 20 }}>Higher silhouette coefficients indicate tighter cohesion and wider separation.</p>
 
-              <div style={{ display: 'flex', alignItems: 'flex-end', gap: 14, height: 200, paddingBottom: 10, borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-end', gap: 14, height: 210, paddingBottom: 10, borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                 {diagnostics.silhouette_scores.map((s, i) => {
-                  const heightPct = Math.round((s / 0.6) * 100);
+                  const maxS = 0.65;
+                  const barHeight = Math.max(16, Math.round((s / maxS) * 140));
                   const isOpt = diagnostics.k_range[i] === diagnostics.recommended_k;
                   return (
-                    <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-                      <span style={{ fontSize: 10, color: isOpt ? '#38bdf8' : '#64748b', fontWeight: isOpt ? 700 : 400 }}>{s.toFixed(2)}</span>
-                      <div style={{ width: '100%', height: `${heightPct}%`, background: isOpt ? 'linear-gradient(180deg, #38bdf8, #6366f1)' : 'rgba(255,255,255,0.1)', borderRadius: 4 }}></div>
-                      <span style={{ fontSize: 11, fontWeight: isOpt ? 800 : 500, color: isOpt ? '#38bdf8' : '#94a3b8' }}>K={diagnostics.k_range[i]}</span>
+                    <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', height: 180, justifyContent: 'flex-end', gap: 8 }}>
+                      <span style={{ fontSize: 11, color: isOpt ? '#38bdf8' : '#94a3b8', fontWeight: isOpt ? 800 : 500 }}>{s.toFixed(2)}</span>
+                      <div
+                        style={{
+                          width: '100%',
+                          height: `${barHeight}px`,
+                          background: isOpt
+                            ? 'linear-gradient(180deg, #38bdf8, #6366f1)'
+                            : 'linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.08))',
+                          borderRadius: '6px 6px 2px 2px',
+                          boxShadow: isOpt ? '0 0 16px rgba(56,189,248,0.4)' : 'none',
+                          border: isOpt ? '1px solid rgba(56,189,248,0.5)' : 'none',
+                          transition: 'all 0.3s ease'
+                        }}
+                      ></div>
+                      <span style={{ fontSize: 12, fontWeight: isOpt ? 800 : 600, color: isOpt ? '#38bdf8' : '#64748b' }}>K={diagnostics.k_range[i]}</span>
                     </div>
                   );
                 })}

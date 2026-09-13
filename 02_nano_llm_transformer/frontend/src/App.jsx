@@ -376,12 +376,12 @@ export default function App() {
             {lossCurves && (
               <div className="glass-panel" style={{ padding: 20 }}>
                 <h3 style={{ fontSize: 15, fontWeight: 700, color: '#f8fafc', marginBottom: 16 }}>SFT Training Loss & Perplexity Trajectory</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 1fr))', gap: 6, alignItems: 'flex-end', height: 160, paddingBottom: 10, borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(36px, 1fr))', gap: 6, alignItems: 'flex-end', height: 160, paddingBottom: 10, borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                   {lossCurves.train_loss.map((loss, i) => {
-                    const heightPct = Math.round((loss / 4.0) * 100);
+                    const barHeight = Math.max(12, Math.round((loss / 4.0) * 120));
                     return (
-                      <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-                        <div style={{ width: '100%', height: `${heightPct}%`, background: 'linear-gradient(180deg, #8b5cf6, #3b82f6)', borderRadius: 4 }}></div>
+                      <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: 140, justifyContent: 'flex-end', gap: 4 }}>
+                        <div style={{ width: '100%', height: `${barHeight}px`, background: 'linear-gradient(180deg, #8b5cf6, #3b82f6)', borderRadius: 4 }}></div>
                         <span style={{ fontSize: 9, color: '#64748b' }}>{lossCurves.steps[i] / 1000}k</span>
                       </div>
                     );
