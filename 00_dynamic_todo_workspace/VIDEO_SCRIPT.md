@@ -1,50 +1,54 @@
 # 🎬 Video Demo Script — Project 0: Zenith Dynamic Task Workspace
 
-**Target Duration**: ~1:45 – 2:00 Minutes  
-**Focus**: Reactive full-stack architecture, dynamic task state machine, Eisenhower matrix, and real-time SSE telemetry.
+> **Target Duration**: ~1:45 Minutes  
+> **Command to Run**: `./run_demo.sh 0` (Open `http://localhost:5173`)  
+> **Code to Show**: `00_dynamic_todo_workspace/server/index.js` (Lines 181–222)
 
 ---
 
-## ⏱️ Timeline & Step-by-Step Walkthrough
-
-### 1. Project Introduction & Purpose (0:00 – 0:25)
-* **What to Say**:  
-  *"Welcome to Project 00: Zenith Dynamic Task Workspace. This system is an enterprise-grade, reactive task management platform designed to eliminate cognitive overload and streamline team execution. It combines modern Kanban flow, Eisenhower priority quadrants, subtask decomposition, and live Server-Sent Events (SSE) telemetry."*
-* **What to Show on Screen**:  
-  - Show the main application view at `http://localhost:5173`.
-  - Point out the dark glassmorphic header, active task counters, and the glowing green **SSE Live Stream** status indicator.
+### 1. General Overview (~25 sec)
+* **What to Say**:
+  > *"Project 0 is the Zenith Dynamic Task Workspace. It's a full-stack project and task management dashboard designed to organize workflows. Think of it like a smart Kanban board with automated priority sorting, subtask checklists, and real-time live synchronization so teams stay aligned without needing to refresh their browser."*
+* **What to Show on Screen**:
+  - Open `http://localhost:5173`.
+  - Point out the dark board layout, column headers (`To Do`, `In Progress`, `Done`), and the glowing green **SSE Live Stream** indicator in the top header.
 
 ---
 
-### 2. Core Architecture & Logic (0:25 – 0:55)
-* **What to Say**:  
-  - **Backend Logic (`server/index.js`)**: *"The backend is powered by Node.js and Express on port 5001. It maintains an event-driven architecture with `/api/events` broadcasting task state mutations to all connected clients in real-time, plus `/api/analytics` computing productivity velocity and priority distributions."*
-  - **Frontend Logic (`client/src/App.jsx`)**: *"The frontend is built with React 18 and Vite. It maintains state synchronization through EventSource listeners, enabling instant optimistic UI updates without manual page refreshes."*
-  - **Task State Machine**: *"Tasks follow a strict progression pipeline: `backlog` ➔ `todo` ➔ `in_progress` ➔ `review` ➔ `done` with subtask checklist completion percentages."*
+### 2. Key Feature Demo (~30 sec)
+* **What to Say & Do**:
+  > *"A key feature of this project is the automated Eisenhower Priority Matrix and real-time task pipeline. When I click '+ Create Task', add a task like 'Build ML Pipeline', assign it 'Urgent' priority, and add two subtasks, it immediately appears on the board. When I check off a subtask, the progress bar updates live, and I can advance it across columns into 'Done'."*
+* **What to Show on Screen**:
+  - Click **"+ Create Task"**, type `Build ML Pipeline`, choose `Urgent (P0)`, add a couple of subtasks, and submit.
+  - Check off a subtask to show the progress bar fill up.
+  - Click the **"Priority Matrix"** tab to show tasks auto-sorted into the *Urgent & Important (Do First)* quadrant.
 
 ---
 
-### 3. Step-by-Step Live User Flow (0:55 – 1:40)
-* **Step 1: Create a New Task (0:55 – 1:10)**
-  - Click **"+ Create Task"**.
-  - Fill in:
-    - **Title**: `Deploy Multi-Head Attention Kernel`
-    - **Status**: `In Progress`
-    - **Priority**: `Urgent (P0)`
-    - **Tags**: `PyTorch, CUDA, Inference`
-    - **Subtasks**: Add `Allocate Continuous Buffer` and `Benchmark latency`.
-  - Click **"Create Task"** and observe it instantly appear in the **In Progress** column with a glowing badge.
-
-* **Step 2: Subtask Progress & Column Advance (1:10 – 1:25)**
-  - On the newly created card, check off a subtask. Notice the progress bar fill to 50% in real-time.
-  - Click **"Advance ➔"** to shift the card into the **In Review** column.
-
-* **Step 3: Eisenhower Priority Matrix & Telemetry (1:25 – 1:40)**
-  - Switch tabs to **"Priority Matrix"**: Demonstrate how P0/P1 tasks automatically populate the *Urgent & Important (Do First)* quadrant.
-  - Switch tabs to **"Productivity Telemetry"**: Show the velocity metrics, status pipeline distribution bar charts, and estimated effort hours.
+### 3. Data Science Concept Used (~20 sec)
+* **What to Say**:
+  > *"The main data science concept here is **Descriptive Analytics and Data Aggregation**. Rather than just storing raw task records, the system continuously aggregates task statuses, calculates completion rates, and breaks down workload by priority tiers to provide immediate productivity metrics."*
 
 ---
 
-### 4. Closing & Takeaway (1:40 – 1:55)
-* **What to Say**:  
-  *"In summary, Project 0 demonstrates how full-stack reactive engineering, real-time telemetry streaming, and thoughtful UX can transform standard task tracking into a high-efficiency productivity workspace."*
+### 4. Code Highlight & Importance (~30 sec)
+* **What to Show on Screen**: Open `00_dynamic_todo_workspace/server/index.js` around line 181.
+* **Code Snippet**:
+  ```javascript
+  // server/index.js - Descriptive Analytics & Aggregation Engine
+  app.get('/api/analytics', (req, res) => {
+    const tasks = readTasks();
+    const total = tasks.length;
+    const done = tasks.filter(t => t.status === 'done').length;
+    const completionRate = total > 0 ? Math.round((done / total) * 100) : 0;
+    const priorityDistribution = {
+      urgent: tasks.filter(t => t.priority === 'urgent').length,
+      high: tasks.filter(t => t.priority === 'high').length,
+      medium: tasks.filter(t => t.priority === 'medium').length,
+      low: tasks.filter(t => t.priority === 'low').length
+    };
+    ...
+  });
+  ```
+* **What to Say**:
+  > *"Here in `server/index.js`, this `/api/analytics` endpoint processes all active tasks. It calculates the team's overall completion percentage and tallies up the priority distribution. This code is essential because it turns raw database records into clear summary metrics that feed the visual telemetry dashboard."*

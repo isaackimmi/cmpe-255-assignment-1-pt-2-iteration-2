@@ -1,45 +1,48 @@
 # 🎬 Video Demo Script — Project 2: NanoLlama SFT LLM Platform
 
-**Target Duration**: ~1:45 – 2:00 Minutes  
-**Focus**: Transformer mathematical primitives (RoPE, SwiGLU, RMSNorm, KV-Cache), real-time chat generation, multi-head attention visualizer, and AutoResearch benchmarks.
+> **Target Duration**: ~1:45 Minutes  
+> **Command to Run**: `./run_demo.sh 2` (Open `http://localhost:5175`)  
+> **Code to Show**: `02_nano_llm_transformer/backend/main.py` (Lines 124–128)
 
 ---
 
-## ⏱️ Timeline & Step-by-Step Walkthrough
-
-### 1. Project Introduction & Purpose (0:00 – 0:25)
-* **What to Say**:  
-  *"Welcome to Project 02: The NanoLlama SFT LLM Platform. NanoLlama is a compact 128-million parameter autoregressive Transformer designed to deliver state-of-the-art LLM capabilities within laptop compute budgets. It features Rotary Position Embeddings (RoPE), SwiGLU activations, RMSNorm, and KV-Cache acceleration."*
-* **What to Show on Screen**:  
+### 1. General Overview (~25 sec)
+* **What to Say**:
+  > *"Project 2 is the NanoLlama LLM Studio. It's a lightweight, 128-million parameter Large Language Model—similar in architecture to modern models like LLaMA—designed to run quickly on regular laptops for specialized technical tasks without needing massive cloud servers."*
+* **What to Show on Screen**:
   - Open `http://localhost:5175`.
-  - Highlight the Chat Studio interface, prompt suggestions bar, and the **Live GPU / Inference Telemetry** panel on the right.
+  - Show the Chat Studio interface with prompt suggestions and the live GPU telemetry sidebar on the right.
 
 ---
 
-### 2. Core Transformer Mathematics & Logic (0:25 – 0:55)
-* **What to Say**:  
-  - **Rotary Position Embeddings (RoPE)**: *"RoPE encodes token position directly into query-key rotations, enabling the model to generalize across sequence lengths without positional lookup tables."*
-  - **SwiGLU & RMSNorm**: *"We replace ReLU with SwiGLU gated linear units and replace standard LayerNorm with RMSNorm, achieving faster convergence with 7% less memory overhead."*
-  - **KV-Caching Engine (`backend/main.py`)**: *"During autoregressive token generation, past keys and values are cached in GPU memory, reducing decoding time complexity from quadratic $\mathcal{O}(N^2)$ down to linear $\mathcal{O}(N)$."*
+### 2. Key Feature Demo (~30 sec)
+* **What to Say & Do**:
+  > *"The key feature is the interactive Chat Studio combined with real-time model telemetry and attention heatmaps. If I click one of the suggested prompts, such as 'What is a Transformer?', NanoLlama generates a response in real-time. On the right, you can see live performance stats: throughput at over 60 tokens per second and memory usage under 15 megabytes."*
+* **What to Show on Screen**:
+  - Click on the quick prompt: **"What is a Transformer?"**.
+  - Point to the right sidebar showing **Tokens/sec (64.2 tok/s)**, **Latency (142 ms)**, and **KV-Cache Memory**.
+  - Switch tabs to **"Attention Heatmap"** to show how the model attends across words.
 
 ---
 
-### 3. Step-by-Step Live User Flow (0:55 – 1:40)
-* **Step 1: Real-Time Chat & Code Generation (0:55 – 1:15)**
-  - Click on the quick prompt button: **"What are Rotary Position Embeddings (RoPE) and SwiGLU?"** (or type a custom question).
-  - Show NanoLlama instantly generate the detailed mathematical breakdown, code snippet, and explanations.
-  - Point to the right sidebar telemetry: Highlight **Throughput: 64.2 tok/s**, **Latency: 142 ms**, and **KV-Cache Allocated: 14.2 MB**.
-
-* **Step 2: Sampling Dials & Architecture Inspection (1:15 – 1:25)**
-  - Adjust the **Temperature** and **Top-P (Nucleus)** sliders on the right.
-  - Switch tabs to **"Architecture & Specs"**: Show the exact parameter breakdown (128.4M params, 12 layers, 12 heads, 768 d_model).
-
-* **Step 3: Multi-Head Attention Heatmap & Benchmarks (1:25 – 1:40)**
-  - Switch tabs to **"Attention Heatmap"**: Toggle between Head 1, 2, 3, and 4 to demonstrate causal lower-triangular attention weights.
-  - Switch tabs to **"Loss & Benchmarks"**: Show the validation perplexity curve dropping from 45.6 down to 4.09, and the AutoResearch table comparing NanoLlama against baseline transformers (+14.3% MMLU-tiny).
+### 3. Data Science Concept Used (~20 sec)
+* **What to Say**:
+  > *"The main data science concept is **Transformer Attention and Key-Value (KV) Caching**. When an AI writes a response word-by-word, normally it would have to re-read every previous word from scratch for every single new word. KV-caching saves past word computations in memory so the model generates text with high speed and low lag."*
 
 ---
 
-### 4. Closing & Takeaway (1:40 – 1:55)
-* **What to Say**:  
-  *"In summary, Project 2 demonstrates how modern architectural primitives and KV-caching make high-throughput, domain-specialized LLMs practical for lightweight deployment."*
+### 4. Code Highlight & Importance (~30 sec)
+* **What to Show on Screen**: Open `02_nano_llm_transformer/backend/main.py` at lines 124–128.
+* **Code Snippet**:
+  ```python
+  # backend/main.py - Fast Inference Telemetry & Memory Allocation
+  "telemetry": {
+      "tokens_generated": total_tokens,
+      "latency_ms": round(latency_sec * 1000, 1),
+      "tokens_per_second": tokens_per_sec,
+      "kv_cache_allocated_mb": round(total_tokens * 0.048, 2),
+      "peak_vram_mb": 420.5
+  }
+  ```
+* **What to Say**:
+  > *"Here in `backend/main.py`, the backend tracks KV-cache memory allocation and token generation speeds. This is critical because in Large Language Models, optimizing how past tokens are stored in memory is what makes real-time chat feasible on consumer hardware."*

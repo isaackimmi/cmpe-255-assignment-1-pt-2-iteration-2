@@ -1,44 +1,45 @@
-# 🎬 Video Demo Script — Project 3: Customer Intelligence & Clustering Platform
+# 🎬 Video Demo Script — Project 3: Customer Segmentation & Clustering
 
-**Target Duration**: ~1:45 – 2:00 Minutes  
-**Focus**: Unsupervised clustering (K-Means, GMM, DBSCAN, Hierarchical), 2D PCA feature projection, Silhouette score diagnostics, and automated persona extraction.
+> **Target Duration**: ~1:45 Minutes  
+> **Command to Run**: `./run_demo.sh 3` (Open `http://localhost:5176`)  
+> **Code to Show**: `03_customer_segmentation_clustering/backend/main.py` (Lines 74–76 & 138–139)
 
 ---
 
-## ⏱️ Timeline & Step-by-Step Walkthrough
-
-### 1. Project Introduction & Purpose (0:00 – 0:25)
-* **What to Say**:  
-  *"Welcome to Project 03: The Customer Intelligence & Segmentation Clustering Platform. Using the popular Kaggle Customer demographic dataset, this platform automates unsupervised customer segmentation to identify distinct behavioral archetypes, evaluate clustering quality, and map targeted marketing strategies."*
-* **What to Show on Screen**:  
+### 1. General Overview (~25 sec)
+* **What to Say**:
+  > *"Project 3 is the Customer Segmentation and Clustering Intelligence platform. It uses customer demographic and spending data from Kaggle to automatically group customers into natural behavioral categories—like VIP spenders, budget shoppers, or mainstream consumers—without needing any pre-existing labels."*
+* **What to Show on Screen**:
   - Open `http://localhost:5176`.
-  - Show the 2D interactive scatter plot of Annual Income vs Spending Score with 5 colored customer clusters and persona cards.
+  - Show the interactive 2D customer scatter plot with 5 distinct color-coded clusters and persona cards.
 
 ---
 
-### 2. Core Machine Learning & Clustering Logic (0:25 – 0:55)
-* **What to Say**:  
-  - **Multi-Algorithm Engine (`backend/main.py`)**: *"The backend implements four unsupervised algorithms: K-Means with WCSS optimization, Gaussian Mixture Models with Expectation-Maximization, Agglomerative Hierarchical with Ward Linkage, and DBSCAN for density-based noise filtering."*
-  - **Dimensionality Reduction & Validation**: *"We perform StandardScaler normalization and 2D PCA decomposition. Clustering quality is validated in real-time using the Silhouette Coefficient ($S=0.554$), Calinski-Harabasz Index, and Davies-Bouldin scores."*
-  - **Persona Synthesis**: *"Clusters are automatically synthesized into business archetypes: VIP Luxury Spenders, Trendsetters, Mainstream Shoppers, Affluent Savers, and Budget Conscious consumers."*
+### 2. Key Feature Demo (~30 sec)
+* **What to Say & Do**:
+  > *"A key feature is the interactive customer explorer and live profiler. In the scatter plot, each dot is an individual customer. If I filter for 'VIP Luxury Spenders', it highlights high-income, high-spending shoppers. Furthermore, if I go to the 'Live Profiler' tab, enter a 28-year-old making $95k with a spending score of 85, and click classify, the model instantly assigns them to the VIP segment with recommended marketing strategies."*
+* **What to Show on Screen**:
+  - Filter the cluster dropdown to show `VIP Luxury Spenders`.
+  - Switch to the **"Live Profiler"** tab, set Age=28, Income=$95k, Spending=85, and click **"Classify Customer Segment"**.
 
 ---
 
-### 3. Step-by-Step Live User Flow (0:55 – 1:40)
-* **Step 1: Interactive Scatter Exploration (0:55 – 1:10)**
-  - Hover over a few dots in the scatter plot: Show the instant tooltip displaying Customer ID, Age, Annual Income, and Assigned Persona.
-  - Use the **Cluster Filter** dropdown to isolate `Cluster #0: VIP Luxury Spenders` (high income, high spend).
-
-* **Step 2: Algorithm Switching & K-Value Tuning (1:10 – 1:25)**
-  - On the right panel, switch the algorithm from **K-Means** to **Gaussian Mixture Model (GMM)** and adjust $K$ from 5 to 4.
-  - Point out how the live Silhouette Score and Calinski-Harabasz metrics recalculate instantly.
-
-* **Step 3: Elbow Diagnostics & Real-Time Classifier (1:25 – 1:40)**
-  - Switch tabs to **"Elbow & Silhouette"**: Highlight the clear inflection point at $K=5$ confirming optimal mathematical partition.
-  - Switch tabs to **"Live Profiler"**: Set Age=28, Income=$95k, Spending=85/100, and click **"Classify Customer Segment"** to demonstrate instant inference placing the customer into the **VIP Luxury Spenders** segment.
+### 3. Data Science Concept Used (~20 sec)
+* **What to Say**:
+  > *"The primary data science concept is **Unsupervised Clustering with K-Means and Feature Scaling**. Because income is measured in thousands while age is a small two-digit number, we use feature scaling to normalize the data so every characteristic is weighted fairly when finding customer groups."*
 
 ---
 
-### 4. Closing & Takeaway (1:40 – 1:55)
-* **What to Say**:  
-  *"In summary, Project 3 demonstrates how unsupervised machine learning and rigorous metric validation translate raw customer behavioral data into actionable marketing playbooks."*
+### 4. Code Highlight & Importance (~30 sec)
+* **What to Show on Screen**: Open `03_customer_segmentation_clustering/backend/main.py` at lines 74–76 and lines 138–139.
+* **Code Snippet**:
+  ```python
+  # backend/main.py - Feature Scaling and K-Means Partitioning
+  scaler = StandardScaler()
+  X_scaled = scaler.fit_transform(X)
+
+  model = KMeans(n_clusters=k, random_state=42, n_init=10)
+  labels = model.fit_predict(X_scaled)
+  ```
+* **What to Say**:
+  > *"Here in `backend/main.py`, we use `StandardScaler` to bring age, income, and spending onto a shared scale, and then apply `KMeans` to group them into 5 clusters. This is the heart of the project: it allows businesses to find patterns in customer data automatically so marketing teams can target each group effectively."*
