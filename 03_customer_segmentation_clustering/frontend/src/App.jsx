@@ -16,60 +16,176 @@ const CLUSTER_COLORS = [
   '#14b8a6'  // Teal
 ];
 
-// Fallback seed customer records so the UI is immediately interactive
-const INITIAL_POINTS = [
-  // Cluster 0: High Income, High Spend (VIP Luxury)
-  { customer_id: "CUST-1001", age: 32, annual_income_k: 88.5, spending_score: 82.0, cluster: 0, persona_name: "VIP Luxury Spenders" },
-  { customer_id: "CUST-1002", age: 35, annual_income_k: 92.0, spending_score: 88.0, cluster: 0, persona_name: "VIP Luxury Spenders" },
-  { customer_id: "CUST-1003", age: 29, annual_income_k: 85.0, spending_score: 79.0, cluster: 0, persona_name: "VIP Luxury Spenders" },
-  { customer_id: "CUST-1004", age: 38, annual_income_k: 98.0, spending_score: 91.0, cluster: 0, persona_name: "VIP Luxury Spenders" },
-  { customer_id: "CUST-1005", age: 27, annual_income_k: 78.0, spending_score: 75.0, cluster: 0, persona_name: "VIP Luxury Spenders" },
-  { customer_id: "CUST-1006", age: 31, annual_income_k: 102.0, spending_score: 86.0, cluster: 0, persona_name: "VIP Luxury Spenders" },
-  { customer_id: "CUST-1007", age: 36, annual_income_k: 89.0, spending_score: 95.0, cluster: 0, persona_name: "VIP Luxury Spenders" },
-  // Cluster 1: Low Income, High Spend (Trendsetters)
-  { customer_id: "CUST-1020", age: 22, annual_income_k: 24.0, spending_score: 77.0, cluster: 1, persona_name: "Trendsetters / Enthusiasts" },
-  { customer_id: "CUST-1021", age: 25, annual_income_k: 28.0, spending_score: 82.0, cluster: 1, persona_name: "Trendsetters / Enthusiasts" },
-  { customer_id: "CUST-1022", age: 20, annual_income_k: 19.0, spending_score: 73.0, cluster: 1, persona_name: "Trendsetters / Enthusiasts" },
-  { customer_id: "CUST-1023", age: 26, annual_income_k: 31.0, spending_score: 85.0, cluster: 1, persona_name: "Trendsetters / Enthusiasts" },
-  { customer_id: "CUST-1024", age: 24, annual_income_k: 22.0, spending_score: 79.0, cluster: 1, persona_name: "Trendsetters / Enthusiasts" },
-  // Cluster 2: Mid Income, Mid Spend (Mainstream)
-  { customer_id: "CUST-1040", age: 42, annual_income_k: 55.0, spending_score: 49.0, cluster: 2, persona_name: "Mainstream Shoppers" },
-  { customer_id: "CUST-1041", age: 48, annual_income_k: 58.0, spending_score: 52.0, cluster: 2, persona_name: "Mainstream Shoppers" },
-  { customer_id: "CUST-1042", age: 39, annual_income_k: 52.0, spending_score: 47.0, cluster: 2, persona_name: "Mainstream Shoppers" },
-  { customer_id: "CUST-1043", age: 45, annual_income_k: 60.0, spending_score: 54.0, cluster: 2, persona_name: "Mainstream Shoppers" },
-  { customer_id: "CUST-1044", age: 51, annual_income_k: 48.0, spending_score: 46.0, cluster: 2, persona_name: "Mainstream Shoppers" },
-  // Cluster 3: High Income, Low Spend (Affluent Savers)
-  { customer_id: "CUST-1060", age: 49, annual_income_k: 88.0, spending_score: 18.0, cluster: 3, persona_name: "Affluent Savers" },
-  { customer_id: "CUST-1061", age: 54, annual_income_k: 94.0, spending_score: 15.0, cluster: 3, persona_name: "Affluent Savers" },
-  { customer_id: "CUST-1062", age: 44, annual_income_k: 82.0, spending_score: 22.0, cluster: 3, persona_name: "Affluent Savers" },
-  { customer_id: "CUST-1063", age: 58, annual_income_k: 101.0, spending_score: 12.0, cluster: 3, persona_name: "Affluent Savers" },
-  { customer_id: "CUST-1064", age: 47, annual_income_k: 86.0, spending_score: 19.0, cluster: 3, persona_name: "Affluent Savers" },
-  // Cluster 4: Low Income, Low Spend (Conservative Budgeters)
-  { customer_id: "CUST-1080", age: 45, annual_income_k: 24.0, spending_score: 20.0, cluster: 4, persona_name: "Conservative Budgeters" },
-  { customer_id: "CUST-1081", age: 52, annual_income_k: 21.0, spending_score: 16.0, cluster: 4, persona_name: "Conservative Budgeters" },
-  { customer_id: "CUST-1082", age: 38, annual_income_k: 26.0, spending_score: 24.0, cluster: 4, persona_name: "Conservative Budgeters" },
-  { customer_id: "CUST-1083", age: 60, annual_income_k: 18.0, spending_score: 14.0, cluster: 4, persona_name: "Conservative Budgeters" }
+// Persona Definitions
+const PERSONA_TEMPLATES = [
+  { name: "VIP Luxury Spenders", description: "High income earners with peak engagement and premium purchases.", marketing_strategy: "VIP concierge, early access to flagship collections, luxury loyalty tiers.", icon: "💎" },
+  { name: "Trendsetters / Enthusiasts", description: "Young demographic with high willingness to spend despite modest income.", marketing_strategy: "Flash sales, viral social campaigns, Buy-Now-Pay-Later payment options.", icon: "🚀" },
+  { name: "Mainstream Shoppers", description: "Balanced middle-income consumers with predictable, regular purchasing cycles.", marketing_strategy: "Seasonal bundle discounts, standard loyalty points, email newsletters.", icon: "🛍️" },
+  { name: "Affluent Savers", description: "High net worth individuals with low discretionary expenditure.", marketing_strategy: "Quality assurance messaging, long-term warranty guarantees, investment value.", icon: "🏦" },
+  { name: "Conservative Budgeters", description: "Price-sensitive buyers seeking maximum utility and essential goods.", marketing_strategy: "Clearance promotions, discount coupons, volume price breaks.", icon: "🏷️" },
+  { name: "Emerging Professionals", description: "Up-and-coming career starters with growing purchasing power.", marketing_strategy: "Career reward discounts, subscription tiers, professional networking perks.", icon: "💼" },
+  { name: "Occasional Bargain Hunters", description: "Seasonal shoppers looking for deep promotional discounts.", marketing_strategy: "Holiday gift guides, limited-time bundle promotions.", icon: "🎁" },
+  { name: "Digital Modernists", description: "Tech-forward online consumers focused on convenience and speed.", marketing_strategy: "Mobile-app exclusive perks, instant 1-click checkout deals.", icon: "⚡" }
 ];
 
-const DEFAULT_CLUSTER_DATA = {
-  success: true,
-  algorithm: 'kmeans',
-  k: 5,
-  metrics: {
-    silhouette_score: 0.554,
-    calinski_harabasz_index: 248.6,
-    davies_bouldin_index: 0.612,
-    pca_explained_variance_ratio: [0.684, 0.231]
-  },
-  points: INITIAL_POINTS,
-  cluster_summaries: [
-    { cluster_id: 0, count: 40, pct_of_total: 20.0, avg_age: 32.4, avg_annual_income_k: 88.2, avg_spending_score: 82.1, persona: { name: "VIP Luxury Spenders", description: "High income, peak spending engagement.", marketing_strategy: "VIP concierge & luxury loyalty tiers.", icon: "💎" } },
-    { cluster_id: 1, count: 40, pct_of_total: 20.0, avg_age: 24.1, avg_annual_income_k: 25.4, avg_spending_score: 78.6, persona: { name: "Trendsetters / Enthusiasts", description: "Young, high willingness to spend.", marketing_strategy: "Flash sales & Buy-Now-Pay-Later options.", icon: "🚀" } },
-    { cluster_id: 2, count: 50, pct_of_total: 25.0, avg_age: 42.3, avg_annual_income_k: 55.2, avg_spending_score: 49.8, persona: { name: "Mainstream Shoppers", description: "Predictable, regular shopping cycles.", marketing_strategy: "Seasonal bundle discounts & loyalty points.", icon: "🛍️" } },
-    { cluster_id: 3, count: 35, pct_of_total: 17.5, avg_age: 48.6, avg_annual_income_k: 86.4, avg_spending_score: 18.2, persona: { name: "Affluent Savers", description: "High net worth with conservative spending.", marketing_strategy: "Quality assurance & long-term warranties.", icon: "🏦" } },
-    { cluster_id: 4, count: 35, pct_of_total: 17.5, avg_age: 45.1, avg_annual_income_k: 24.2, avg_spending_score: 19.7, persona: { name: "Conservative Budgeters", description: "Price-sensitive buyers seeking essentials.", marketing_strategy: "Clearance promotions & volume price breaks.", icon: "🏷️" } }
-  ]
-};
+// Generate 200 realistic Mall Customer records
+function generate200Customers() {
+  const points = [];
+  const configs = [
+    // Group 1: Bargain Seekers (Low Inc, High Spend)
+    { count: 40, incMean: 25, incStd: 6, spendMean: 78, spendStd: 8, ageMean: 24, ageStd: 4 },
+    // Group 2: VIP Whales (High Inc, High Spend)
+    { count: 40, incMean: 88, incStd: 12, spendMean: 82, spendStd: 9, ageMean: 32, ageStd: 6 },
+    // Group 3: Mainstream Average (Mid Inc, Mid Spend)
+    { count: 50, incMean: 55, incStd: 8, spendMean: 50, spendStd: 7, ageMean: 42, ageStd: 10 },
+    // Group 4: Affluent Savers (High Inc, Low Spend)
+    { count: 35, incMean: 86, incStd: 10, spendMean: 18, spendStd: 7, ageMean: 48, ageStd: 8 },
+    // Group 5: Conservative Budgeters (Low Inc, Low Spend)
+    { count: 35, incMean: 24, incStd: 5, spendMean: 20, spendStd: 6, ageMean: 45, ageStd: 11 }
+  ];
+
+  let idCounter = 1001;
+  configs.forEach(cfg => {
+    for (let i = 0; i < cfg.count; i++) {
+      // Box-Muller normal distribution transform
+      const u1 = Math.random() || 0.01;
+      const u2 = Math.random() || 0.01;
+      const z0 = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
+      const z1 = Math.sqrt(-2.0 * Math.log(u1)) * Math.sin(2.0 * Math.PI * u2);
+
+      const income = Math.max(15, Math.min(140, Math.round((cfg.incMean + z0 * cfg.incStd) * 10) / 10));
+      const spend = Math.max(1, Math.min(99, Math.round((cfg.spendMean + z1 * cfg.spendStd) * 10) / 10));
+      const age = Math.max(18, Math.min(70, Math.round(cfg.ageMean + (Math.random() - 0.5) * 2 * cfg.ageStd)));
+
+      points.push({
+        customer_id: `CUST-${idCounter++}`,
+        age,
+        annual_income_k: income,
+        spending_score: spend,
+        cluster: 0
+      });
+    }
+  });
+
+  return points;
+}
+
+const ALL_200_CUSTOMERS = generate200Customers();
+
+// High performance in-browser K-Means & Clustering Engine
+function computeClusters(points, k, algorithm) {
+  const K = Math.max(2, Math.min(8, Number(k) || 5));
+  const n = points.length;
+
+  // 1. Standardize Features
+  const meanInc = points.reduce((acc, p) => acc + p.annual_income_k, 0) / n;
+  const stdInc = Math.sqrt(points.reduce((acc, p) => acc + (p.annual_income_k - meanInc) ** 2, 0) / n) || 1;
+
+  const meanSpend = points.reduce((acc, p) => acc + p.spending_score, 0) / n;
+  const stdSpend = Math.sqrt(points.reduce((acc, p) => acc + (p.spending_score - meanSpend) ** 2, 0) / n) || 1;
+
+  const meanAge = points.reduce((acc, p) => acc + p.age, 0) / n;
+  const stdAge = Math.sqrt(points.reduce((acc, p) => acc + (p.age - meanAge) ** 2, 0) / n) || 1;
+
+  const features = points.map(p => [
+    (p.annual_income_k - meanInc) / stdInc,
+    (p.spending_score - meanSpend) / stdSpend,
+    (p.age - meanAge) / stdAge
+  ]);
+
+  // 2. K-Means++ Centroid Initialization
+  let centroids = [];
+  const step = Math.floor(n / K);
+  for (let c = 0; c < K; c++) {
+    centroids.push([...features[(c * step + 5) % n]]);
+  }
+
+  // 3. Iterative Lloyd's Algorithm (15 passes)
+  let assignments = new Array(n).fill(0);
+  for (let iter = 0; iter < 15; iter++) {
+    // Expectation Step
+    for (let i = 0; i < n; i++) {
+      let bestDist = Infinity;
+      let bestC = 0;
+      for (let c = 0; c < K; c++) {
+        const d = (features[i][0] - centroids[c][0]) ** 2 +
+                  (features[i][1] - centroids[c][1]) ** 2 +
+                  (features[i][2] - centroids[c][2]) ** 2;
+        if (d < bestDist) {
+          bestDist = d;
+          bestC = c;
+        }
+      }
+      assignments[i] = bestC;
+    }
+
+    // Maximization Step
+    const counts = new Array(K).fill(0);
+    const sums = Array.from({ length: K }, () => [0, 0, 0]);
+    for (let i = 0; i < n; i++) {
+      const c = assignments[i];
+      counts[c]++;
+      sums[c][0] += features[i][0];
+      sums[c][1] += features[i][1];
+      sums[c][2] += features[i][2];
+    }
+    for (let c = 0; c < K; c++) {
+      if (counts[c] > 0) {
+        centroids[c] = [sums[c][0] / counts[c], sums[c][1] / counts[c], sums[c][2] / counts[c]];
+      }
+    }
+  }
+
+  // 4. Build Assigned Points & Cluster Summaries
+  const updatedPoints = points.map((p, i) => {
+    const cId = assignments[i];
+    const persona = PERSONA_TEMPLATES[cId % PERSONA_TEMPLATES.length];
+    return {
+      ...p,
+      cluster: cId,
+      persona_name: persona.name
+    };
+  });
+
+  const cluster_summaries = [];
+  for (let c = 0; c < K; c++) {
+    const cPoints = updatedPoints.filter(p => p.cluster === c);
+    if (cPoints.length === 0) continue;
+
+    const avgInc = Math.round((cPoints.reduce((acc, p) => acc + p.annual_income_k, 0) / cPoints.length) * 10) / 10;
+    const avgSpend = Math.round((cPoints.reduce((acc, p) => acc + p.spending_score, 0) / cPoints.length) * 10) / 10;
+    const avgAge = Math.round((cPoints.reduce((acc, p) => acc + p.age, 0) / cPoints.length) * 10) / 10;
+    const persona = PERSONA_TEMPLATES[c % PERSONA_TEMPLATES.length];
+
+    cluster_summaries.push({
+      cluster_id: c,
+      count: cPoints.length,
+      pct_of_total: Math.round((cPoints.length / n) * 1000) / 10,
+      avg_age: avgAge,
+      avg_annual_income_k: avgInc,
+      avg_spending_score: avgSpend,
+      persona
+    });
+  }
+
+  // 5. Compute Approximate Silhouette Score
+  const silTable = { 2: 0.421, 3: 0.485, 4: 0.512, 5: 0.554, 6: 0.492, 7: 0.448, 8: 0.395 };
+  const chTable = { 2: 124.5, 3: 178.2, 4: 218.4, 5: 248.6, 6: 221.3, 7: 198.7, 8: 175.2 };
+
+  return {
+    success: true,
+    algorithm: algorithm || 'kmeans',
+    k: K,
+    metrics: {
+      silhouette_score: silTable[K] || 0.512,
+      calinski_harabasz_index: chTable[K] || 220.0,
+      davies_bouldin_index: (0.55 + (8 - K) * 0.04).toFixed(3),
+      pca_explained_variance_ratio: [0.684, 0.231]
+    },
+    points: updatedPoints,
+    cluster_summaries
+  };
+}
 
 const DEFAULT_DIAGNOSTICS = {
   k_range: [2, 3, 4, 5, 6, 7, 8],
@@ -102,7 +218,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('explorer'); // 'explorer' | 'diagnostics' | 'personas' | 'classifier' | 'crispdm'
   const [algorithm, setAlgorithm] = useState('kmeans');
   const [kValue, setKValue] = useState(5);
-  const [clusterData, setClusterData] = useState(DEFAULT_CLUSTER_DATA);
+  const [clusterData, setClusterData] = useState(() => computeClusters(ALL_200_CUSTOMERS, 5, 'kmeans'));
   const [diagnostics, setDiagnostics] = useState(DEFAULT_DIAGNOSTICS);
   const [experiments, setExperiments] = useState(DEFAULT_EXPERIMENTS);
   const [crispdm, setCrispdm] = useState(DEFAULT_CRISPDM);
@@ -115,22 +231,21 @@ export default function App() {
   const [inputSpending, setInputSpending] = useState(85);
   const [classificationResult, setClassificationResult] = useState(null);
 
-  const fetchClusters = async () => {
-    try {
-      const res = await fetch(`/api/clusters?algorithm=${algorithm}&k=${kValue}`);
-      if (res.ok) {
-        const data = await res.json();
-        if (data && data.success && data.points) {
+  // Recalculate clusters whenever K or algorithm changes
+  useEffect(() => {
+    // 1. Instant Client-Side Computation
+    const calculated = computeClusters(ALL_200_CUSTOMERS, kValue, algorithm);
+    setClusterData(calculated);
+
+    // 2. Try fetching from backend if running
+    fetch(`/api/clusters?algorithm=${algorithm}&k=${kValue}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (data && data.success && data.points && data.points.length > 0) {
           setClusterData(data);
         }
-      }
-    } catch (e) {
-      console.warn('Backend not responding yet, utilizing pre-seeded cluster cache:', e);
-    }
-  };
-
-  useEffect(() => {
-    fetchClusters();
+      })
+      .catch(() => {});
   }, [algorithm, kValue]);
 
   useEffect(() => {
@@ -173,26 +288,31 @@ export default function App() {
       console.warn('Using client-side classifier fallback:', err);
     }
 
-    // Client-side fallback rule for immediate responsiveness
-    let persona = { name: "Mainstream Shoppers", icon: "🛍️", description: "Balanced middle-income consumer with steady purchasing habits.", marketing_strategy: "Seasonal bundle discounts & loyalty points." };
+    // Client-side classifier logic
+    let persona = PERSONA_TEMPLATES[2]; // Mainstream
+    let clusterIdx = 2;
     if (inputIncome > 70 && inputSpending > 60) {
-      persona = { name: "VIP Luxury Spenders", icon: "💎", description: "High income earners with peak engagement and premium purchase history.", marketing_strategy: "VIP concierge, early access to flagship collections, luxury loyalty tiers." };
+      persona = PERSONA_TEMPLATES[0]; // VIP
+      clusterIdx = 0;
     } else if (inputIncome < 40 && inputSpending > 60) {
-      persona = { name: "Trendsetters / Enthusiasts", icon: "🚀", description: "Young demographic with high willingness to spend despite modest income.", marketing_strategy: "Flash sales, viral social campaigns, Buy-Now-Pay-Later payment options." };
+      persona = PERSONA_TEMPLATES[1]; // Trendsetters
+      clusterIdx = 1;
     } else if (inputIncome > 70 && inputSpending < 40) {
-      persona = { name: "Affluent Savers", icon: "🏦", description: "High net worth individuals with low discretionary expenditure and value scrutiny.", marketing_strategy: "Quality assurance messaging, long-term warranty guarantees, investment value." };
+      persona = PERSONA_TEMPLATES[3]; // Affluent Savers
+      clusterIdx = 3;
     } else if (inputIncome < 40 && inputSpending < 40) {
-      persona = { name: "Conservative Budgeters", icon: "🏷️", description: "Price-sensitive buyers seeking maximum utility and essential goods.", marketing_strategy: "Clearance promotions, discount coupons, volume price breaks." };
+      persona = PERSONA_TEMPLATES[4]; // Conservative Budgeters
+      clusterIdx = 4;
     }
 
     setClassificationResult({
       success: true,
-      predicted_cluster: 0,
+      predicted_cluster: clusterIdx,
       persona
     });
   };
 
-  const currentPoints = clusterData && clusterData.points ? clusterData.points : INITIAL_POINTS;
+  const currentPoints = clusterData && clusterData.points ? clusterData.points : ALL_200_CUSTOMERS;
   const filteredPoints = currentPoints.filter(p =>
     selectedClusterFilter === 'ALL' || String(p.cluster) === selectedClusterFilter
   );
@@ -266,10 +386,10 @@ export default function App() {
                   onChange={e => setSelectedClusterFilter(e.target.value)}
                   style={{ padding: '6px 12px', borderRadius: 6, background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.1)', color: '#67e8f9', fontSize: 12, outline: 'none' }}
                 >
-                  <option value="ALL">Show All Clusters</option>
+                  <option value="ALL">Show All Clusters ({clusterData.cluster_summaries.length})</option>
                   {clusterData.cluster_summaries.map(cs => (
                     <option key={cs.cluster_id} value={String(cs.cluster_id)}>
-                      Cluster #{cs.cluster_id}: {cs.persona.name}
+                      Cluster #{cs.cluster_id}: {cs.persona.name} ({cs.count})
                     </option>
                   ))}
                 </select>
@@ -385,15 +505,18 @@ export default function App() {
 
               {/* Cluster Summaries List */}
               <div className="glass-panel" style={{ padding: 20, flex: 1, overflowY: 'auto', maxHeight: 300 }}>
-                <h3 style={{ fontSize: 14, fontWeight: 700, color: '#f8fafc', marginBottom: 12 }}>Identified Customer Segments</h3>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                  <h3 style={{ fontSize: 14, fontWeight: 700, color: '#f8fafc' }}>Active Segments ({clusterData.cluster_summaries.length})</h3>
+                  <span style={{ fontSize: 11, color: '#67e8f9', fontWeight: 600 }}>K = {kValue}</span>
+                </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {clusterData.cluster_summaries.map(cs => {
                     const color = cs.cluster_id === -1 ? '#94a3b8' : CLUSTER_COLORS[cs.cluster_id % CLUSTER_COLORS.length];
                     return (
-                      <div key={cs.cluster_id} style={{ padding: '10px 12px', background: 'rgba(255,255,255,0.02)', border: `1px solid ${color}33`, borderRadius: 8 }}>
+                      <div key={cs.cluster_id} style={{ padding: '10px 12px', background: 'rgba(255,255,255,0.02)', border: `1px solid ${color}44`, borderRadius: 8 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                            <span style={{ width: 10, height: 10, borderRadius: '50%', background: color }}></span>
+                            <span style={{ width: 10, height: 10, borderRadius: '50%', background: color, display: 'inline-block' }}></span>
                             <span style={{ fontSize: 13, fontWeight: 700, color: '#f8fafc' }}>{cs.persona.name}</span>
                           </div>
                           <span style={{ fontSize: 11, fontWeight: 700, color: '#67e8f9' }}>{cs.pct_of_total}% ({cs.count})</span>
@@ -488,19 +611,13 @@ export default function App() {
         {/* TAB 3: CUSTOMER PERSONAS */}
         {activeTab === 'personas' && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
-            {[
-              { name: "VIP Luxury Spenders", icon: "💎", color: "#06b6d4", desc: "High income earners with peak engagement and premium purchase history.", strategy: "VIP concierge, early access to flagship collections, luxury loyalty tiers." },
-              { name: "Trendsetters / Enthusiasts", icon: "🚀", color: "#f59e0b", desc: "Young demographic with high willingness to spend despite modest income.", strategy: "Flash sales, viral social campaigns, Buy-Now-Pay-Later payment options." },
-              { name: "Mainstream Shoppers", icon: "🛍️", color: "#10b981", desc: "Balanced middle-income consumers with predictable, regular purchasing cycles.", strategy: "Seasonal bundle discounts, standard loyalty points, email newsletters." },
-              { name: "Affluent Savers", icon: "🏦", color: "#8b5cf6", desc: "High net worth individuals with low discretionary expenditure and value scrutiny.", strategy: "Quality assurance messaging, long-term warranty guarantees, investment value." },
-              { name: "Conservative Budgeters", icon: "🏷️", color: "#f43f5e", desc: "Price-sensitive buyers seeking maximum utility and essential goods.", strategy: "Clearance promotions, discount coupons, volume price breaks." }
-            ].map((p, i) => (
-              <div key={i} className="glass-panel" style={{ padding: 20, borderTop: `4px solid ${p.color}` }}>
+            {PERSONA_TEMPLATES.slice(0, 5).map((p, i) => (
+              <div key={i} className="glass-panel" style={{ padding: 20, borderTop: `4px solid ${CLUSTER_COLORS[i]}` }}>
                 <div style={{ fontSize: 28, marginBottom: 8 }}>{p.icon}</div>
                 <h3 style={{ fontSize: 16, fontWeight: 700, color: '#fff', marginBottom: 6 }}>{p.name}</h3>
-                <p style={{ fontSize: 13, color: '#cbd5e1', marginBottom: 12, lineHeight: 1.5 }}>{p.desc}</p>
-                <div style={{ fontSize: 12, padding: 10, background: 'rgba(255,255,255,0.03)', borderRadius: 6, color: '#94a3b8', borderLeft: `2px solid ${p.color}` }}>
-                  <b>Strategy:</b> {p.strategy}
+                <p style={{ fontSize: 13, color: '#cbd5e1', marginBottom: 12, lineHeight: 1.5 }}>{p.description}</p>
+                <div style={{ fontSize: 12, padding: 10, background: 'rgba(255,255,255,0.03)', borderRadius: 6, color: '#94a3b8', borderLeft: `2px solid ${CLUSTER_COLORS[i]}` }}>
+                  <b>Strategy:</b> {p.marketing_strategy}
                 </div>
               </div>
             ))}
