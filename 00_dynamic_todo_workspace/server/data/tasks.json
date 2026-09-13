@@ -1,16 +1,71 @@
 [
   {
+    "id": "task-1789276555830",
+    "title": "implement crazy DS thing",
+    "description": "",
+    "status": "todo",
+    "priority": "urgent",
+    "dueDate": "2026-09-16",
+    "tags": [],
+    "subtasks": [],
+    "estimatedMinutes": 120,
+    "createdAt": "2026-09-13T05:15:55.830Z",
+    "updatedAt": "2026-09-13T05:15:55.830Z"
+  },
+  {
+    "id": "task-1789276540126",
+    "title": "todo 1",
+    "description": "",
+    "status": "todo",
+    "priority": "high",
+    "dueDate": "2026-09-16",
+    "tags": [],
+    "subtasks": [],
+    "estimatedMinutes": 30,
+    "createdAt": "2026-09-13T05:15:40.126Z",
+    "updatedAt": "2026-09-13T05:15:40.126Z"
+  },
+  {
+    "id": "task-1789276467910",
+    "title": "todo 1",
+    "description": "",
+    "status": "backlog",
+    "priority": "medium",
+    "dueDate": "2026-09-16",
+    "tags": [],
+    "subtasks": [],
+    "estimatedMinutes": 30,
+    "createdAt": "2026-09-13T05:14:27.910Z",
+    "updatedAt": "2026-09-13T05:14:41.675Z"
+  },
+  {
     "id": "task-1",
     "title": "Design CRISP-DM Machine Learning Pipeline",
     "description": "Establish data preparation, feature engineering transformations, and model evaluation protocols.",
     "status": "in_progress",
     "priority": "urgent",
     "dueDate": "2026-09-10",
-    "tags": ["Machine Learning", "Architecture", "CRISP-DM"],
+    "tags": [
+      "Machine Learning",
+      "Architecture",
+      "CRISP-DM"
+    ],
     "subtasks": [
-      { "id": "sub-1", "title": "Define business understanding objectives", "completed": true },
-      { "id": "sub-2", "title": "Build outlier filtering and imputation modules", "completed": true },
-      { "id": "sub-3", "title": "Configure cross-validation split strategy", "completed": false }
+      {
+        "id": "sub-1",
+        "title": "Define business understanding objectives",
+        "completed": true
+      },
+      {
+        "id": "sub-2",
+        "title": "Build outlier filtering and imputation modules",
+        "completed": true
+      },
+      {
+        "id": "sub-3",
+        "title": "Configure cross-validation split strategy",
+        "completed": false
+      }
     ],
     "estimatedMinutes": 180,
     "createdAt": "2026-09-01T10:00:00.000Z",
@@ -23,10 +78,22 @@
     "status": "todo",
     "priority": "high",
     "dueDate": "2026-09-12",
-    "tags": ["Deep Learning", "Transformers", "Optimization"],
+    "tags": [
+      "Deep Learning",
+      "Transformers",
+      "Optimization"
+    ],
     "subtasks": [
-      { "id": "sub-4", "title": "Allocate continuous buffer cache", "completed": false },
-      { "id": "sub-5", "title": "Benchmark tokens/second latency", "completed": false }
+      {
+        "id": "sub-4",
+        "title": "Allocate continuous buffer cache",
+        "completed": false
+      },
+      {
+        "id": "sub-5",
+        "title": "Benchmark tokens/second latency",
+        "completed": false
+      }
     ],
     "estimatedMinutes": 120,
     "createdAt": "2026-09-01T12:00:00.000Z",
@@ -39,10 +106,21 @@
     "status": "done",
     "priority": "medium",
     "dueDate": "2026-09-02",
-    "tags": ["Data Mining", "Algorithms"],
+    "tags": [
+      "Data Mining",
+      "Algorithms"
+    ],
     "subtasks": [
-      { "id": "sub-6", "title": "Compute support thresholds", "completed": true },
-      { "id": "sub-7", "title": "Generate association rule dataframe", "completed": true }
+      {
+        "id": "sub-6",
+        "title": "Compute support thresholds",
+        "completed": true
+      },
+      {
+        "id": "sub-7",
+        "title": "Generate association rule dataframe",
+        "completed": true
+      }
     ],
     "estimatedMinutes": 90,
     "completedAt": "2026-09-02T18:00:00.000Z",
@@ -53,17 +131,30 @@
     "id": "task-4",
     "title": "Deploy NYC Taxi Duration Random Forest Regressor",
     "description": "Serve FastAPI endpoint with geospatial haversine and bearing feature transformations.",
-    "status": "review",
+    "status": "done",
     "priority": "high",
     "dueDate": "2026-09-05",
-    "tags": ["FastAPI", "Deployment", "Geospatial"],
+    "tags": [
+      "FastAPI",
+      "Deployment",
+      "Geospatial"
+    ],
     "subtasks": [
-      { "id": "sub-8", "title": "Validate endpoint latency under 10ms", "completed": true },
-      { "id": "sub-9", "title": "Verify Leaflet coordinate bounds", "completed": false }
+      {
+        "id": "sub-8",
+        "title": "Validate endpoint latency under 10ms",
+        "completed": true
+      },
+      {
+        "id": "sub-9",
+        "title": "Verify Leaflet coordinate bounds",
+        "completed": false
+      }
     ],
     "estimatedMinutes": 60,
     "createdAt": "2026-08-31T14:00:00.000Z",
-    "updatedAt": "2026-09-02T11:00:00.000Z"
+    "updatedAt": "2026-09-13T05:14:37.764Z",
+    "completedAt": "2026-09-13T05:14:37.764Z"
   },
   {
     "id": "task-5",
@@ -72,9 +163,16 @@
     "status": "backlog",
     "priority": "low",
     "dueDate": "2026-09-18",
-    "tags": ["Clustering", "Analytics"],
+    "tags": [
+      "Clustering",
+      "Analytics"
+    ],
     "subtasks": [
-      { "id": "sub-10", "title": "Calculate Recency, Frequency, Monetary metrics", "completed": false }
+      {
+        "id": "sub-10",
+        "title": "Calculate Recency, Frequency, Monetary metrics",
+        "completed": false
+      }
     ],
     "estimatedMinutes": 150,
     "createdAt": "2026-09-02T08:00:00.000Z",
