@@ -1,5 +1,10 @@
 # 🌟 Enterprise Data Science, Machine Learning & AI Applications Portfolio
 
+## Assignment 1 Part 2 Video Demo
+
+[Watch the Assignment 1 Part 2 demo on YouTube](https://youtu.be/i-bOXkiA4MM)
+
+
 A comprehensive, production-grade portfolio of **6 Full-Stack Data Science, Machine Learning, Deep Learning, and Intelligent Web Systems (Projects 00 through 05)**, engineered adhering to the **CRISP-DM standard**, rigorous mathematical foundations, interactive data science administration dashboards, and state-of-the-art UX.
 
 ---
